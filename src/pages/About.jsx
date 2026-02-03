@@ -1,13 +1,88 @@
-import React from 'react'
-import Skillcard from '../components/Skillcard'
+import React, { useEffect, useRef } from 'react'
 import ResumeIllustration from '../assets/svg/undraw_my-resume_etai.svg?url'
 
 function About() {
-  const timeline = [
-    { year: '2024', title: 'Senior Developer', company: 'Tech Corp', description: 'Leading development of enterprise applications' },
-    { year: '2022', title: 'Full Stack Developer', company: 'Startup Inc', description: 'Built scalable web applications from scratch' },
-    { year: '2020', title: 'Frontend Developer', company: 'Digital Agency', description: 'Created stunning user interfaces for clients' },
-    { year: '2018', title: 'Junior Developer', company: 'Software House', description: 'Started professional development career' }
+  const countersRef = useRef([])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target
+          const targetValue = parseInt(counter.getAttribute('data-target'))
+          const duration = 2000 // 2 seconds
+          const increment = targetValue / (duration / 16)
+          let currentValue = 0
+
+          const timer = setInterval(() => {
+            currentValue += increment
+            if (currentValue >= targetValue) {
+              counter.textContent = targetValue
+              clearInterval(timer)
+            } else {
+              counter.textContent = Math.floor(currentValue)
+            }
+          }, 16)
+        }
+      })
+    }, { threshold: 0.5 })
+
+    const validElements = countersRef.current.filter(el => el instanceof Element)
+    validElements.forEach(counter => {
+      observer.observe(counter)
+    })
+
+    return () => {
+      validElements.forEach(counter => {
+        observer.unobserve(counter)
+      })
+    }
+  }, [])
+
+  const timelineEvents = [
+    {
+      year: '2020',
+      title: 'Web Developer Intern',
+      company: 'Tech Solutions Inc.',
+      description: 'Developed responsive web applications using HTML, CSS, and JavaScript. Assisted in building client portals and internal tools.'
+    },
+    {
+      year: '2021',
+      title: 'Junior Frontend Developer',
+      company: 'Digital Agency',
+      description: 'Created modern React applications with complex state management. Implemented responsive designs for various client projects.'
+    }
+    
+  ]
+
+  const statistics = [
+    { number: 150, label: 'Projects Completed' },
+    { number: 50, label: 'Clients Served' },
+    { number: 5, label: 'Years Experience' },
+    { number: 25, label: 'Technologies' }
+  ]
+
+  const highlights = [
+    {
+      title: 'Frontend Development',
+      description: 'React, Vue.js, TypeScript, Tailwind CSS',
+      icon: '💻'
+    },
+    {
+      title: 'Backend Development',
+      description: 'Node.js, Python, Express, Django',
+      icon: '⚙️'
+    },
+    {
+      title: 'Database Management',
+      description: 'MongoDB, PostgreSQL, MySQL, Redis',
+      icon: '📊'
+    },
+    {
+      title: 'DevOps & Tools',
+      description: 'Docker, AWS, Git, CI/CD',
+      icon: '🔧'
+    }
   ]
 
   return (
@@ -20,80 +95,139 @@ function About() {
           <span className="title-text">About Me</span>
           <span className="title-decoration"></span>
         </h2>
-        <div className="about-content">
-          <div className="about-text">
-            <div className="about-intro">
-              <p className="lead-text">
-                Hello! I'm a passionate Full Stack Developer with over 5 years of experience 
-                building web applications. I started my journey in software development during 
-                college and have since worked on diverse projects ranging from small business 
-                websites to enterprise-level applications.
-              </p>
-              <p>
-                My approach to development focuses on writing clean, maintainable code and 
-                creating intuitive user experiences. I believe in continuous learning and 
-                staying updated with the latest technologies and best practices in the industry.
-              </p>
-              <p>
-                When I'm not coding, you can find me exploring new technologies, 
-                contributing to open-source projects, or sharing knowledge through 
-                technical writing and mentoring.
-              </p>
+
+        {/* Professional Summary */}
+        <div className="professional-summary">
+          <div className="summary-card">
+            <div className="summary-header">
+              <h3 className="section-subtitle">Professional Summary</h3>
+              <div className="summary-icon-large">💼</div>
             </div>
-            
-            <div className="timeline">
-              {timeline.map((item, index) => (
-                <div key={index} className="timeline-item">
-                  <div className="timeline-year">{item.year}</div>
-                  <div className="timeline-content">
-                    <h4>{item.title}</h4>
-                    <p className="timeline-company">{item.company}</p>
-                    <p className="timeline-description">{item.description}</p>
+            <div className="summary-content">
+              <div className="summary-text-container">
+                <p className="summary-text">
+                  Results-driven Full Stack Developer with 5+ years of experience building scalable web applications. 
+                  Passionate about creating intuitive user experiences and leveraging modern technologies to solve 
+                  complex business challenges. Specialized in React ecosystem with expertise in both frontend and 
+                  backend development.
+                </p>
+                <p className="summary-text secondary">
+                  Proven track record of delivering high-quality projects on time, collaborating with cross-functional teams,
+                  and continuously improving development processes.
+                </p>
+              </div>
+              <div className="summary-highlights">
+                <div className="summary-item">
+                  <div className="summary-item-icon">🎯</div>
+                  <div className="summary-item-content">
+                    <h4 className="summary-item-title">Problem Solver</h4>
+                    <p className="summary-item-description">Analytical approach to complex challenges</p>
                   </div>
                 </div>
-              ))}
+                <div className="summary-item">
+                  <div className="summary-item-icon">🚀</div>
+                  <div className="summary-item-content">
+                    <h4 className="summary-item-title">Fast Learner</h4>
+                    <p className="summary-item-description">Quickly adapting to new technologies</p>
+                  </div>
+                </div>
+                <div className="summary-item">
+                  <div className="summary-item-icon">🤝</div>
+                  <div className="summary-item-content">
+                    <h4 className="summary-item-title">Team Player</h4>
+                    <p className="summary-item-description">Collaborative approach to development</p>
+                  </div>
+                </div>
+                <div className="summary-item">
+                  <div className="summary-item-icon">✨</div>
+                  <div className="summary-item-content">
+                    <h4 className="summary-item-title">Detail Oriented</h4>
+                    <p className="summary-item-description">Meticulous attention to quality</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="about-stats">
-            <div className="stats-grid">
-              <div className="stat-card">
-                <div className="stat-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                  </svg>
-                </div>
-                <span className="stat-number">5+</span>
-                <span className="stat-label">Years Experience</span>
+        </div>
+
+        {/* Experience Statistics */}
+        <div className="about-statistics">
+          {statistics.map((stat, index) => (
+            <div key={index} className="stat-card">
+              <div className="stat-number">
+                <span ref={el => countersRef.current.push(el)} data-target={stat.number}>0</span>
+                {index === 2 && <span className="stat-suffix">+</span>}
               </div>
-              <div className="stat-card">
-                <div className="stat-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
+              <div className="stat-label">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Professional Journey */}
+        <div className="professional-journey">
+          <h3 className="section-subtitle">Professional Journey</h3>
+          <div className="journey-container">
+            {timelineEvents.map((event, index) => (
+              <div 
+                key={index} 
+                className={`journey-card ${index % 2 === 0 ? 'journey-card-left' : 'journey-card-right'}`}
+              >
+                <div className="journey-header">
+                  <div className="journey-year">
+                    <span className="year-icon">📅</span>
+                    <span className="year-text">{event.year}</span>
+                  </div>
+                  <div className="journey-badge">
+                    {index === 0 ? '🚀 Start' : index === timelineEvents.length - 1 ? '🏆 Current' : '📈 Growth'}
+                  </div>
                 </div>
-                <span className="stat-number">50+</span>
-                <span className="stat-label">Projects Completed</span>
-              </div>
-              <div className="stat-card">
-                <div className="stat-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                  </svg>
+                <div className="journey-content">
+                  <div className="journey-title">{event.title}</div>
+                  <div className="journey-company">
+                    <span className="company-icon">🏢</span>
+                    <span className="company-text">{event.company}</span>
+                  </div>
+                  <div className="journey-description">{event.description}</div>
                 </div>
-                <span className="stat-number">30+</span>
-                <span className="stat-label">Happy Clients</span>
-              </div>
-              <div className="stat-card">
-                <div className="stat-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="8" r="7"/>
-                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-                  </svg>
+                <div className="journey-visual">
+                  <div className="journey-line"></div>
                 </div>
-                <span className="stat-number">15+</span>
-                <span className="stat-label">Awards Won</span>
               </div>
+            ))}
+          </div>
+        </div>
+     
+        {/* Education & Interests */}
+        <div className="education-interests">
+          <div className="education-card">
+            <h3 className="section-subtitle">Education & Certifications</h3>
+            <div className="education-list">
+              <div className="education-item">
+                <div className="education-degree">B.S. Computer Science</div>
+                <div className="education-institution">University of Technology</div>
+                <div className="education-year">2016 - 2020</div>
+              </div>
+              <div className="education-item">
+                <div className="education-degree">React Advanced Certification</div>
+                <div className="education-institution">Coursera</div>
+                <div className="education-year">2022</div>
+              </div>
+              <div className="education-item">
+                <div className="education-degree">AWS Certified Developer</div>
+                <div className="education-institution">Amazon Web Services</div>
+                <div className="education-year">2023</div>
+              </div>
+            </div>
+          </div>
+          <div className="interests-card">
+            <h3 className="section-subtitle">Interests Beyond Work</h3>
+            <div className="interests-grid">
+              <div className="interest-item">🧗‍♂️ Hiking & Outdoors</div>
+              <div className="interest-item">📚 Reading Tech Literature</div>
+              <div className="interest-item">🎮 Gaming</div>
+              <div className="interest-item">🎨 Digital Art</div>
+              <div className="interest-item">⚽ Soccer</div>
+              <div className="interest-item">🎵 Music Production</div>
             </div>
           </div>
         </div>

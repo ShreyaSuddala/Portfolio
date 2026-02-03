@@ -1,8 +1,7 @@
-import React from 'react'
-import GithubIcon from '../assets/images/github.svg?url'
-import LinkedInIcon from '../assets/images/linkedin.svg?url'
-import TwitterIcon from '../assets/images/twitter.svg?url'
-import GmailIcon from '../assets/images/gmail.svg?url'
+import GithubIcon from '../assets/images/social.png?url'
+import LinkedInIcon from '../assets/images/linkedin.png?url'
+import GmailIcon from '../assets/images/gmail.png?url'
+
 
 function Footer() {
   const currentYear = new Date().getFullYear()
@@ -10,7 +9,6 @@ function Footer() {
   const socialLinks = [
     { name: 'GitHub', icon: GithubIcon, link: 'https://github.com' },
     { name: 'LinkedIn', icon: LinkedInIcon, link: 'https://linkedin.com' },
-    { name: 'Twitter', icon: TwitterIcon, link: 'https://twitter.com' },
     { name: 'Email', icon: GmailIcon, link: 'mailto:hello@example.com' }
   ]
 

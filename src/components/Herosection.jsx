@@ -2,8 +2,9 @@ import GithubIcon from '../assets/images/social.png?url'
 import LinkedInIcon from '../assets/images/linkedin.png?url'
 import GmailIcon from '../assets/images/gmail.png?url'
 import HeroAvatar from '../assets/svg/undraw_businesswoman-avatar_ktl2.svg?url'
+import { Link } from 'react-router-dom'
 
-function Herosection({ scrollToSection }) {
+function Herosection() {
   const socialLinks = [
     { name: 'GitHub', icon: GithubIcon, link: 'https://github.com' },
     { name: 'LinkedIn', icon: LinkedInIcon, link: 'https://linkedin.com' },
@@ -36,15 +37,15 @@ function Herosection({ scrollToSection }) {
           Passionate about creating elegant solutions to complex problems.
         </p>
         <div className="hero-buttons">
-          <button className="btn btn-primary" onClick={() => scrollToSection('projects')}>
+          <Link to="/projects" className="btn btn-primary">
             <span>View My Work</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </button>
-          <button className="btn btn-secondary" onClick={() => scrollToSection('contact')}>
+          </Link>
+          <Link to="/contact" className="btn btn-secondary">
             <span>Get In Touch</span>
-          </button>
+          </Link>
         </div>
         <div className="social-links">
           {socialLinks.map((social) => (
@@ -59,14 +60,6 @@ function Herosection({ scrollToSection }) {
               <img src={social.icon} alt={social.name} className="social-icon" />
             </a>
           ))}
-        </div>
-      </div>
-      <div className="scroll-indicator">
-        <span>Scroll to explore</span>
-        <div className="scroll-arrow">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 5v14M5 12l7 7 7-7" />
-          </svg>
         </div>
       </div>
     </section>

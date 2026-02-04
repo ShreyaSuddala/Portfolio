@@ -1,24 +1,31 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-function Navbar({ activeSection, isScrolled, scrollToSection }) {
-  const navItems = ['home', 'about', 'skills', 'projects', 'contact']
+function Navbar({ isScrolled }) {
+  const navItems = [
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About' },
+    { path: '/skills', label: 'Skills' },
+    { path: '/projects', label: 'Projects' },
+    { path: '/contact', label: 'Contact' }
+  ]
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="nav-brand">
+      <NavLink to="/" className="nav-brand">
         <span className="brand-text">Portfolio</span>
         <span className="brand-dot">.</span>
-      </div>
+      </NavLink>
       <ul className="nav-links">
-        {navItems.map((section) => (
-          <li key={section}>
-            <a 
-              href={`#${section}`} 
-              className={activeSection === section ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); scrollToSection(section) }}
+        {navItems.map((item) => (
+          <li key={item.path}>
+            <NavLink 
+              to={item.path} 
+              className={({ isActive }) => isActive ? 'active' : ''}
+              end={item.path === '/'}
             >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </a>
+              {item.label}
+            </NavLink>
           </li>
         ))}
       </ul>

@@ -189,48 +189,11 @@ function About() {
                   </div>
                   <div className="journey-description">{event.description}</div>
                 </div>
-                <div className="journey-visual">
-                  <div className="journey-line"></div>
-                </div>
               </div>
             ))}
           </div>
         </div>
-     
-        {/* Education & Interests */}
-        <div className="education-interests">
-          <div className="education-card">
-            <h3 className="section-subtitle">Education & Certifications</h3>
-            <div className="education-list">
-              <div className="education-item">
-                <div className="education-degree">B.S. Computer Science</div>
-                <div className="education-institution">University of Technology</div>
-                <div className="education-year">2016 - 2020</div>
-              </div>
-              <div className="education-item">
-                <div className="education-degree">React Advanced Certification</div>
-                <div className="education-institution">Coursera</div>
-                <div className="education-year">2022</div>
-              </div>
-              <div className="education-item">
-                <div className="education-degree">AWS Certified Developer</div>
-                <div className="education-institution">Amazon Web Services</div>
-                <div className="education-year">2023</div>
-              </div>
-            </div>
-          </div>
-          <div className="interests-card">
-            <h3 className="section-subtitle">Interests Beyond Work</h3>
-            <div className="interests-grid">
-              <div className="interest-item">🧗‍♂️ Hiking & Outdoors</div>
-              <div className="interest-item">📚 Reading Tech Literature</div>
-              <div className="interest-item">🎮 Gaming</div>
-              <div className="interest-item">🎨 Digital Art</div>
-              <div className="interest-item">⚽ Soccer</div>
-              <div className="interest-item">🎵 Music Production</div>
-            </div>
-          </div>
-        </div>
+    
       </div>
     </section>
   )

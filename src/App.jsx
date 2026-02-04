@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
+import About from './pages/About'
+import Skills from './pages/Skills'
+import Project from './pages/Project'
+import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 import GlassBackground from './components/GlassBackground'
 
 function App() {
-  const [activeSection, setActiveSection] = useState('home')
   const [isScrolled, setIsScrolled] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
-      
-      const sections = ['home', 'about', 'skills', 'projects', 'contact']
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
     }
 
     const handleMouseMove = (e) => {
@@ -39,14 +32,6 @@ function App() {
       window.removeEventListener('mousemove', handleMouseMove)
     }
   }, [])
-
-  const scrollToSection = (sectionId) => {
-    setActiveSection(sectionId)
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <div className="app" style={{
@@ -63,14 +48,17 @@ function App() {
       <div className="scanlines"></div>
 
       {/* Navigation */}
-      <Navbar 
-        activeSection={activeSection} 
-        isScrolled={isScrolled} 
-        scrollToSection={scrollToSection}
-      />
+      <Navbar isScrolled={isScrolled} />
 
       {/* Main Content */}
-      <Home scrollToSection={scrollToSection} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/skills" element={<Skills />} />
+        <Route path="/projects" element={<Project />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
 
       {/* Footer */}
       <Footer />
